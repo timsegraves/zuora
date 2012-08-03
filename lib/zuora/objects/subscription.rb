@@ -23,7 +23,7 @@ module Zuora::Objects
     validates_datetime_of     :term_end_date, :allow_nil => true
     validates_datetime_of     :term_start_date
     validates_inclusion_of    :term_type, :in => ['TERMED', 'EVERGREEN'], :allow_nil => true
-    validates_inclusion_of    :invoice_owner_id
+    #validates_inclusion_of    :invoice_owner_id
 
     define_attributes do
 
