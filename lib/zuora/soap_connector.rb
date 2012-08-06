@@ -20,9 +20,12 @@ module Zuora
             key = k
             if @model.custom_attributes.include?(k)
               key = k.to_s[0..-4].camelize + '__c'
+              key = key.to_sym
             else
               key = k.to_s.camelize.to_sym
             end
+
+            puts "AA: " + key
               
             a.__send__(ons, key, v) unless v.nil?
           end
@@ -42,6 +45,7 @@ module Zuora
             key = k
             if @model.custom_attributes.include?(k)
               key = k.to_s[0..-4].camelize + '__c'
+              key = key.to_sym
             else
               key = k.to_s.camelize.to_sym
             end
