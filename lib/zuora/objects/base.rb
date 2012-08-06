@@ -55,6 +55,10 @@ module Zuora::Objects
       class_variable_get(:@@custom_attributes)
     end
 
+    def self.custom_attributes
+      class_variable_get(:@@custom_attributes)
+    end
+
     def self.namespace(uri)
       Zuora::Api.instance.client.soap.namespace_by_uri(uri)
     end
@@ -80,7 +84,7 @@ module Zuora::Objects
     # generate the sql queries. This may be overcome in the future.
     def self.where(where)
       keys = (attributes - unselectable_attributes).map(&:to_s).map(&:camelcase)
-      custom_attr = @@custom_attributes.map(&:to_s).map(&:camelcase).map { |a| a << '__c' }
+      custom_attr = custom_attributes.map(&:to_s).map(&:camelcase).map { |a| a << '__c' }
       keys = keys + custom_attr
       if where.is_a?(Hash)
         # FIXME: improper inject usage.
