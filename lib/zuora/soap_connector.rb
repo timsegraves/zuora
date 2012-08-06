@@ -25,7 +25,7 @@ module Zuora
               key = k.to_s.camelize.to_sym
             end
 
-            puts "AA: " + key
+            puts "AA: " + key.to_s
               
             a.__send__(ons, key, v) unless v.nil?
           end
