@@ -54,7 +54,7 @@ module Zuora::Objects
         :invoice_date => Proc.new { Date.today }
       )
       custom(
-        :processed
+        :processed__c
       )
     end
   end

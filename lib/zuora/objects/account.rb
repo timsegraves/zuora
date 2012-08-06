@@ -25,7 +25,7 @@ module Zuora::Objects
       defer  :ancestor_account_id
 
       # Custom attributes
-      custom :coupon_code, :is_reseller, :reseller_account_id
+      custom :coupon_code__c, :is_reseller__c, :reseller_account_id__c
 
       defaults :auto_pay => false,
                :currency => 'USD',
