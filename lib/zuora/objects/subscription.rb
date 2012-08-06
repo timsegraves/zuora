@@ -34,6 +34,8 @@ module Zuora::Objects
                :initial_term        => 1,
                :is_invoice_separate => false,
                :renewal_term        => 0
+
+      custom :user_id
     end
   end
 end
