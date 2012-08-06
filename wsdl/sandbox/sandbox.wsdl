@@ -20,8 +20,6 @@
 			</complexType>
 			
 	
-			
-			
 			<complexType name="Account">
 				<complexContent>
 					<extension base="ons:zObject">
@@ -57,8 +55,8 @@
 							<element minOccurs="0" name="Status" nillable="true" type="string" />
                				<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime" />
-                      <element minOccurs="0" name="CouponCode__c" nillable="true" type="string" />
-                      <element minOccurs="0" name="IsReseller__c" nillable="true" type="string"  />
+                            <element minOccurs="0" name="CouponCode__c" nillable="true" type="string" />
+                            <element minOccurs="0" name="IsReseller__c" nillable="true" type="string"  />
                				<element minOccurs="0" name="ResellerAccountId__c" nillable="true" type="string"  />
 						</sequence>
 					</extension>
@@ -211,12 +209,13 @@
 							<element minOccurs="0" name="PostedBy" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="PostedDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="RefundAmount" nillable="true" type="decimal"  />
+							<element minOccurs="0" name="RegenerateInvoicePDF" nillable="true" type="boolean"  />
 							<element minOccurs="0" name="Status" nillable="true" type="string" />
 							<element minOccurs="0" name="TargetDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="TransferredToAccounting" nillable="true" type="string" />
 							<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 							<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
-              <element minOccurs="0" name="Processed__c" nillable="true" type="string" />
+                            <element minOccurs="0" name="Processed__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -686,8 +685,8 @@
 							<element minOccurs="0" name="TermType" nillable="true" type="string" />
 			               	<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 			               	<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
-							<element minOccurs="0" name="Version" nillable="true" type="int" />              
-              <element minOccurs="0" name="UserId__c" nillable="true" type="string" />
+							<element minOccurs="0" name="Version" nillable="true" type="int" />
+                            <element minOccurs="0" name="UserId__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -1575,7 +1574,7 @@
 	</binding>
 	<service name="ZuoraService">
 		<port name="Soap" binding="zns:SoapBinding">
-			<soap:address location="https://apisandbox.zuora.com/apps/services/a/38.0" />
+			<soap:address location="https://apisandbox.zuora.com/apps/services/a/40.0" />
 		</port>
 	</service>
 </definitions>

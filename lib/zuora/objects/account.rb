@@ -21,6 +21,8 @@ module Zuora::Objects
                 :parent_id, :total_invoice_balance, :updated_date,
                 :created_by_id, :last_invoice_date, :updated_by_id
 
+      deferred  :ancestor_account_id
+
       defaults :auto_pay => false,
                :currency => 'USD',
                :batch => 'Batch1',
