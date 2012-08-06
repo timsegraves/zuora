@@ -19,7 +19,7 @@ module Zuora
           @model.to_hash.each do |k,v|
             key = k
             if @model.custom_attributes.include?(k)
-              key = k.to_s[0..-2].camelize + '__c'
+              key = k.to_s[0..-4].camelize + '__c'
             end
               
             a.__send__(ons, key.to_s.camelize.to_sym, v) unless v.nil?
@@ -39,7 +39,7 @@ module Zuora
           obj_attrs.reject{|k,v| @model.read_only_attributes.include?(k) }.each do |k,v|
             key = k
             if @model.custom_attributes.include?(k)
-              key = k.to_s[0..-2].camelize + '__c'
+              key = k.to_s[0..-4].camelize + '__c'
             end
             a.__send__(ons, key.to_s.camelize.to_sym, v) if change_syms.include?(k)
           end
