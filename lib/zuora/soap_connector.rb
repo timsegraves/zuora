@@ -18,7 +18,7 @@ module Zuora
         xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
           @model.to_hash.each do |k,v|
             key = k
-            puts "AA: " + k
+            puts "AA: " + k.to_s
             if @model.custom_attributes.include?(k)
               key = k.to_s[0..-4].camelize + '__c'
               puts "BB: " + key
