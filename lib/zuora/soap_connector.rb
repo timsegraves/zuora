@@ -18,13 +18,13 @@ module Zuora
         xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
           @model.to_hash.each do |k,v|
             key = k
-            puts "AA: " + k.to_s
             if @model.custom_attributes.include?(k)
               key = k.to_s[0..-4].camelize + '__c'
-              puts "BB: " + key
+            else
+              key = k.to_s.camelize.to_sym
             end
               
-            a.__send__(ons, key.to_s.camelize.to_sym, v) unless v.nil?
+            a.__send__(ons, key, v) unless v.nil?
           end
           generate_complex_objects(a, :create)
         end
@@ -42,8 +42,10 @@ module Zuora
             key = k
             if @model.custom_attributes.include?(k)
               key = k.to_s[0..-4].camelize + '__c'
+            else
+              key = k.to_s.camelize.to_sym
             end
-            a.__send__(ons, key.to_s.camelize.to_sym, v) if change_syms.include?(k)
+            a.__send__(ons, key, v) if change_syms.include?(k)
           end
           generate_complex_objects(a, :update)
         end
