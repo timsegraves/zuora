@@ -21,7 +21,11 @@ module Zuora::Objects
                 :parent_id, :total_invoice_balance, :updated_date,
                 :created_by_id, :last_invoice_date, :updated_by_id
 
+      # Add non-queryable fields here
       defer  :ancestor_account_id
+
+      # Custom attributes
+      custom :coupon_code__c
 
       defaults :auto_pay => false,
                :currency => 'USD',
@@ -32,4 +36,3 @@ module Zuora::Objects
     end
   end
 end
-
