@@ -7,7 +7,7 @@ module Zuora::Objects
     has_many :rate_plans
 
     validates_presence_of :contract_effective_date, :initial_term,
-                          :renewal_term, :term_start_date
+                          :renewal_term, :term_start_date, :invoice_owner_id
 
     validates_inclusion_of    :auto_renew, :in => [true, false]
     validates_datetime_of     :cancelled_date, :allow_nil => true
@@ -34,6 +34,11 @@ module Zuora::Objects
                :initial_term        => 1,
                :is_invoice_separate => false,
                :renewal_term        => 0
+
+      # Add non-queryable fields here
+      defer  :ancestor_account_id
+
+      custom :user_id__c
     end
   end
 end

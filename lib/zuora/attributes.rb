@@ -97,6 +97,11 @@ module Zuora
       end
       alias_method :deferred_attributes, :defer
 
+      def custom(*args)
+        class_variable_set(:@@custom_attributes, args)
+      end
+      alias_method :custom_attributes, :custom
+
       # alias to support a cleaner DSL for generating custom fattrs
       # and tracking the default attributes for dirty support
       def defaults(*args)
@@ -145,6 +150,7 @@ module Zuora
         subclass.send(:class_variable_set, :@@restrain_attributes, [])
         subclass.send(:class_variable_set, :@@write_only_attributes, [])
         subclass.send(:class_variable_set, :@@deferred_attributes, [])
+        subclass.send(:class_variable_set, :@@custom_attributes, [])
         subclass.send(:class_variable_set, :@@all_attributes, [])
 
         subclass.send(:define_attribute_methods, wsdl_attrs)
@@ -191,6 +197,12 @@ module Zuora
     def deferred_attributes
       return [] unless self.class.class_variable_defined?(:@@deferred_attributes)
       self.class.send(:class_variable_get, :@@deferred_attributes)
+    end
+
+    # custom attributes are handled separately
+    def custom_attributes
+      return [] unless self.class.class_variable_defined?(:@@custom_attributes)
+      self.class.send(:class_variable_get, :@@custom_attributes)
     end
 
     # a hash representation of all attributes including their values

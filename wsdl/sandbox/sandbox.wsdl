@@ -20,8 +20,6 @@
 			</complexType>
 			
 	
-			
-			
 			<complexType name="Account">
 				<complexContent>
 					<extension base="ons:zObject">
@@ -48,6 +46,7 @@
 							<element minOccurs="0" name="LastInvoiceDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
 							<element minOccurs="0" name="Notes" nillable="true" type="string" />
+							<element minOccurs="0" name="ParentId" nillable="true" type="zns:ID"  />
 							<element minOccurs="0" name="PaymentGateway" nillable="true" type="string"  />
 							<element minOccurs="0" name="PaymentTerm" nillable="true" type="string" /><!-- user-defined enum -->
 							<element minOccurs="0" name="PurchaseOrderNumber" nillable="true" type="string" />
@@ -56,6 +55,9 @@
 							<element minOccurs="0" name="Status" nillable="true" type="string" />
                				<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime" />
+                            <element minOccurs="0" name="CouponCode__c" nillable="true" type="string" />
+                            <element minOccurs="0" name="IsReseller__c" nillable="true" type="string"  />
+               				<element minOccurs="0" name="ResellerAccountId__c" nillable="true" type="string"  />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -135,6 +137,8 @@
                				<element minOccurs="0" name="CreatedDate" nillable="true" type="dateTime"  />
                				<element minOccurs="0" name="CustomerAcceptanceDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="Description" nillable="true" type="string" />
+							<element minOccurs="0" name="DestinationAccountId" nillable="true" type="zns:ID" />
+							<element minOccurs="0" name="DestinationInvoiceOwnerId" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="EffectiveDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="InitialTerm" nillable="true" type="long" />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
@@ -205,11 +209,13 @@
 							<element minOccurs="0" name="PostedBy" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="PostedDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="RefundAmount" nillable="true" type="decimal"  />
+							<element minOccurs="0" name="RegenerateInvoicePDF" nillable="true" type="boolean"  />
 							<element minOccurs="0" name="Status" nillable="true" type="string" />
 							<element minOccurs="0" name="TargetDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="TransferredToAccounting" nillable="true" type="string" />
 							<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 							<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
+                            <element minOccurs="0" name="Processed__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -480,6 +486,7 @@
 							<element minOccurs="0" name="ProductId" nillable="true" type="zns:ID" />
                				<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
+                            <element minOccurs="0" name="ResellerAccountId__c" nillable="true" type="string"  />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -651,13 +658,17 @@
 					<extension base="ons:zObject">
 						<sequence>
 							<element minOccurs="0" name="AccountId" nillable="true" type="zns:ID" />
+							<element minOccurs="0" name="AncestorAccountId" nillable="true" type="zns:ID"  />
 							<element minOccurs="0" name="AutoRenew" nillable="true" type="boolean" />
 							<element minOccurs="0" name="CancelledDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="ContractAcceptanceDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="ContractEffectiveDate" nillable="true" type="dateTime" />
 			               	<element minOccurs="0" name="CreatedById" nillable="true" type="zns:ID"  />
 			               	<element minOccurs="0" name="CreatedDate" nillable="true" type="dateTime"  />
+							<element minOccurs="0" name="CreatorAccountId" nillable="true" type="zns:ID" />
+							<element minOccurs="0" name="CreatorInvoiceOwnerId" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="InitialTerm" nillable="true" type="int" />
+							<element minOccurs="0" name="InvoiceOwnerId" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="IsInvoiceSeparate" nillable="true" type="boolean" />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
 							<element minOccurs="0" name="Notes" nillable="true" type="string" />
@@ -675,6 +686,7 @@
 			               	<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 			               	<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
 							<element minOccurs="0" name="Version" nillable="true" type="int" />
+                            <element minOccurs="0" name="UserId__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
@@ -687,6 +699,7 @@
 	     			 <sequence>
 		      			 <element minOccurs="0" name="AccountId" nillable="true" type="zns:ID" />
 		      			 <element minOccurs="0" name="AccountNumber" nillable="true" type="string" />
+		      			 <element minOccurs="0" name="AncestorAccountId" nillable="true" type="zns:ID" />
 		      			 <element minOccurs="0" name="ChargeId" nillable="true" type="zns:ID" />
 		      			 <element minOccurs="0" name="ChargeNumber" nillable="true" type="string"/>
 		               	 <element minOccurs="0" name="CreatedById" nillable="true" type="zns:ID"  />
@@ -1045,6 +1058,20 @@
 					</sequence>
 				</complexType>
 			</element>
+           <element name="queryMore"> 
+                <complexType> 
+                    <sequence> 
+                        <element name="queryLocator" type="zns:QueryLocator"/> 
+                    </sequence> 
+                </complexType> 
+            </element> 
+            <element name="queryMoreResponse"> 
+                <complexType> 
+                    <sequence> 
+                        <element name="result" type="zns:QueryResult"/> 
+                    </sequence> 
+                </complexType> 
+            </element> 
 			<element name="SessionHeader">
 				<complexType>
 					<sequence>
@@ -1052,6 +1079,14 @@
 					</sequence>
 				</complexType>
 			</element>
+            <element name="QueryOptions">
+                <complexType>
+                    <sequence>
+                        <element name="batchSize" type="int" minOccurs="0"/>
+                        <element name="caseSensitive" type="boolean" minOccurs="0" />
+                    </sequence>
+                </complexType>
+            </element>
 			<element name="getUserInfoResponse">
 				<complexType>
 					<sequence>
@@ -1263,8 +1298,15 @@
 	<message name="queryResponse">
 		<part name="parameters" element="zns:queryResponse" />
 	</message>
+	    <message name="queryMoreRequest"> 
+	        <part element="zns:queryMore" name="parameters"/> 
+	    </message> 
+	    <message name="queryMoreResponse"> 
+	        <part element="zns:queryMoreResponse" name="parameters"/> 
+	    </message> 
 	<message name="Header">
 		<part name="CallOptions" element="zns:CallOptions" />
+		<part name="QueryOptions" element="zns:QueryOptions" />
 		<part name="SessionHeader" element="zns:SessionHeader" />
 	</message>
 	
@@ -1331,6 +1373,13 @@
 			<fault message="zns:InvalidQueryLocatorFault" name="InvalidQueryLocatorFault" />
 			<fault message="zns:UnexpectedErrorFault" name="UnexpectedErrorFault" />
 		</operation>
+        <operation name="queryMore"> 
+            <documentation>Gets the next batch of sObjects from a query</documentation> 
+            <input  message="zns:queryMoreRequest"/> 
+            <output message="zns:queryMoreResponse"/> 
+            <fault  message="zns:InvalidQueryLocatorFault" name="InvalidQueryLocatorFault"/> 
+            <fault  message="zns:UnexpectedErrorFault" name="UnexpectedErrorFault"/> 
+        </operation> 
         <operation name="getUserInfo">
         	<input message="zns:getUserInfo"/>
         	<output message="zns:getUserInfoResponse"/>
@@ -1424,6 +1473,7 @@
 		<operation name="query">
 			<soap:operation soapAction="" />
 			<input>
+				<soap:header use="literal" message="zns:Header" part="QueryOptions"  />
 				<soap:header use="literal" message="zns:Header" part="SessionHeader" />
 				<soap:body use="literal" />
 			</input>
@@ -1440,6 +1490,23 @@
 				<soap:fault name="UnexpectedErrorFault" use="literal" />
 			</fault>
 		</operation>
+        <operation name="queryMore"> 
+            <soap:operation soapAction=""/> 
+            <input> 
+				<soap:header use="literal" message="zns:Header" part="QueryOptions" />
+				<soap:header use="literal" message="zns:Header" part="SessionHeader" />
+				<soap:body use="literal" />
+            </input> 
+            <output> 
+                <soap:body use="literal"/> 
+            </output> 
+            <fault name="InvalidQueryLocatorFault"> 
+                <soap:fault name="InvalidQueryLocatorFault" use="literal"/> 
+            </fault> 
+            <fault name="UnexpectedErrorFault"> 
+                <soap:fault name="UnexpectedErrorFault" use="literal"/> 
+            </fault> 
+        </operation>
 		<operation name="delete">
 			<soap:operation soapAction="" />
 			<input>
@@ -1507,7 +1574,7 @@
 	</binding>
 	<service name="ZuoraService">
 		<port name="Soap" binding="zns:SoapBinding">
-			<soap:address location="https://apisandbox.zuora.com/apps/services/a/38.0" />
+			<soap:address location="https://apisandbox.zuora.com/apps/services/a/40.0" />
 		</port>
 	</service>
 </definitions>

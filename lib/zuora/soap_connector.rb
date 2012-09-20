@@ -17,7 +17,15 @@ module Zuora
       Zuora::Api.instance.request(:create) do |xml|
         xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
           @model.to_hash.each do |k,v|
-            a.__send__(ons, k.to_s.camelize.to_sym, v) unless v.nil?
+            key = k
+            if @model.custom_attributes.include?(k)
+              key = k.to_s[0..-4].camelize + '__c'
+              key = key.to_sym
+            else
+              key = k.to_s.camelize.to_sym
+            end
+
+            a.__send__(ons, key, v) unless v.nil?
           end
           generate_complex_objects(a, :create)
         end
@@ -32,7 +40,14 @@ module Zuora
           a.__send__(ons, :Id, obj_id)
           change_syms = @model.changed.map(&:to_sym)
           obj_attrs.reject{|k,v| @model.read_only_attributes.include?(k) }.each do |k,v|
-            a.__send__(ons, k.to_s.camelize.to_sym, v) if change_syms.include?(k)
+            key = k
+            if @model.custom_attributes.include?(k)
+              key = k.to_s[0..-4].camelize + '__c'
+              key = key.to_sym
+            else
+              key = k.to_s.camelize.to_sym
+            end
+            a.__send__(ons, key, v) if change_syms.include?(k)
           end
           generate_complex_objects(a, :update)
         end
