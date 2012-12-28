@@ -14,10 +14,6 @@ describe Zuora::Api do
       File.exists?(Zuora::Api::SANDBOX_WSDL).should be
     end
 
-    it "uses production WSDL by default" do
-      Zuora::Api.instance.client.wsdl.endpoint.to_s.should == "https://www.zuora.com/apps/services/a/40.0"
-    end
-
     it "can be configured to use sandbox WSDL" do
       Zuora.configure(:username => 'example', :password => 'test', :sandbox => true)
       Zuora::Api.instance.client.wsdl.endpoint.to_s.should == "https://apisandbox.zuora.com/apps/services/a/40.0"

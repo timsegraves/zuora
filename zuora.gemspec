@@ -22,11 +22,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<activemodel>, ["3.2.8"])
   s.add_runtime_dependency(%q<libxml4r>, ['0.2.6'])
 
-  s.add_development_dependency(%q<rake>, ["0.9.2.2"])
+  s.add_development_dependency(%q<rake>, ["0.8.7"])
   s.add_development_dependency(%q<guard-rspec>, ["0.6.0"])
   s.add_development_dependency(%q<artifice>, ["0.6.0"])
   s.add_development_dependency(%q<yard>, ["0.7.5"])
-  s.add_development_dependency(%q<rspec>, ["2.11.0"])
+  s.add_development_dependency(%q<rspec>, ["2.8.0"])
   s.add_development_dependency(%q<redcarpet>, ["2.1.0"])
   s.add_development_dependency(%q<factory_girl>, ["2.6.4"])
   s.add_development_dependency(%q<appraisal>, ["0.4.1"])
