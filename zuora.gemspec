@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [ "README.md" ]
 
   s.add_runtime_dependency(%q<savon>, ["0.9.8"])
-  s.add_runtime_dependency(%q<activesupport>, ["3.2.10"])
-  s.add_runtime_dependency(%q<activemodel>, ["3.2.10"])
+  s.add_runtime_dependency 'activesupport'
+  s.add_runtime_dependency 'activemodel'
   s.add_runtime_dependency(%q<libxml4r>, ['0.2.6'])
 
   s.add_development_dependency(%q<rake>, ["0.8.7"])
