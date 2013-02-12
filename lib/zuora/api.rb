@@ -75,7 +75,7 @@ module Zuora
         if block_given?
           puts "BB"
           soap.body do |xml| 
-            puts xml
+            puts xml.inspect
             yield xml
           end
         else
