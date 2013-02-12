@@ -130,7 +130,9 @@ module Zuora::Objects
     def self.batch_create(models)
       # Make sure we're not over the limit
       if models.count > MAX_BATCH_SIZE
-        self.errors.add(:base, "The max batch size is #{MAX_BATCH_SIZE}")
+        #self.errors.add(:base, "The max batch size is #{MAX_BATCH_SIZE}")
+        puts "error2"
+        false
       else
         result = self.connector.batch_create(models)
         apply_response(result.to_hash, :create_response)
@@ -197,6 +199,21 @@ module Zuora::Objects
       end
     end
 
+    # TODO: Don't duplicate this
+    def self.apply_response(response_hash, type)
+      result = response_hash[type][:result]
+      puts response_hash.inspect
+      if result[:success]
+        #self.id = result[:id]
+        #@previously_changed = changes
+        #@changed_attributes.clear
+        return true
+      else
+        puts "error"
+        #self.errors.add(:base, result[:errors][:message])
+        return false
+      end
+    end
   end
 end
 
