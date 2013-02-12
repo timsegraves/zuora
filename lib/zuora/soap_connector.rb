@@ -34,9 +34,9 @@ module Zuora
 
     def batch_create(models)
       Zuora::Api.instance.request(:create) do |xml|
-        xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
-          models.each do |m|
-            @model = m
+        models.each do |m|
+          @model = m
+          xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
             @model.to_hash.each do |k,v|
               key = k
               if @model.custom_attributes.include?(k)
