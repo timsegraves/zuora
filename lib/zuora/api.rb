@@ -68,11 +68,19 @@ module Zuora
     def request(method, xml_body=nil, &block)
       authenticate! unless authenticated?
 
+
+
       response = client.request(method) do
         soap.header = {'env:SessionHeader' => {'ins0:Session' => self.session.try(:key) }}
         if block_given?
-          soap.body{|xml| yield xml }
+          puts "BB"
+          soap.body do |xml| 
+            puts xml
+            yield xml
+          end
         else
+          puts "AA"
+          puts xml_body
           soap.body = xml_body
         end
       end
