@@ -6,6 +6,9 @@ module Zuora::Objects
     include Zuora::Validations
     include Zuora::Associations
 
+    # TODO: Move this somewhere more global
+    MAX_BATCH_SIZE = 50
+
     # generate a new instance of a Zuora object
     def initialize(attrs={}, &block)
       apply_default_attributes
