@@ -123,6 +123,17 @@ module Zuora::Objects
       apply_response(result.to_hash, :create_response)
     end
 
+    # Takes an array of models and does a batch create
+    def self.batch_create(models)
+      # Make sure we're not over the limit
+      if models.count > MAX_BATCH_SIZE
+        self.errors.add(:base, "The max batch size is #{MAX_BATCH_SIZE}"
+      else
+        result = self.connector.batch_create(models)
+        apply_response(result.to_hash, :create_response)
+      end
+    end
+
     def update
       result = self.connector.update
       result = apply_response(result.to_hash, :update_response)

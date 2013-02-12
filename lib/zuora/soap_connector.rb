@@ -32,6 +32,28 @@ module Zuora
       end
     end
 
+    def batch_create(models)
+      Zuora::Api.instance.request(:create) do |xml|
+        xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
+          models.each do |m|
+            @model = m
+            @model.to_hash.each do |k,v|
+              key = k
+              if @model.custom_attributes.include?(k)
+                key = k.to_s[0..-4].camelize + '__c'
+                key = key.to_sym
+              else
+                key = k.to_s.camelize.to_sym
+              end
+
+              a.__send__(ons, key, v) unless v.nil?
+            end
+            generate_complex_objects(a, :create)
+          end
+        end
+      end
+    end
+
     def update
       Zuora::Api.instance.request(:update) do |xml|
         xml.__send__(zns, :zObjects, 'xsi:type' => "#{ons}:#{remote_name}") do |a|
