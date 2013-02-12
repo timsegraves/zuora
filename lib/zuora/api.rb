@@ -68,21 +68,14 @@ module Zuora
     def request(method, xml_body=nil, &block)
       authenticate! unless authenticated?
 
-
-
       response = client.request(method) do
         soap.header = {'env:SessionHeader' => {'ins0:Session' => self.session.try(:key) }}
         if block_given?
-          puts "BB"
-          soap.body do |xml| 
-            puts xml.inspect
-            yield xml
-          end
+          soap.body{|xml| yield xml }
         else
-          puts "AA"
-          puts xml_body
           soap.body = xml_body
         end
+        puts soap.body
       end
     rescue Savon::SOAP::Fault, IOError => e
       raise Zuora::Fault.new(:message => e.message)
