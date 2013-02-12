@@ -72,6 +72,7 @@ module Zuora
         soap.header = {'env:SessionHeader' => {'ins0:Session' => self.session.try(:key) }}
         if block_given?
           soap.body{|xml| yield xml }
+          soap.body = soap.body.to_hash
         else
           soap.body = xml_body
         end
